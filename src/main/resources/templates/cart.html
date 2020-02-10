@@ -1,0 +1,238 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>我的购物车</title>
+    <link rel="stylesheet" th:href="@{~/css/cart.css}">
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <script>
+        var c = 0;
+        var t;
+
+        function timedCount() {
+            $("#time").html(c);
+            c = c + 1;
+            t = setTimeout("timedCount()", 1000);
+        }
+
+        function start() {
+            var Rdiv = document.getElementById("right");
+            var Cdiv = document.getElementById("left");
+            var Adiv = document.getElementById("address");
+            if (Cdiv.offsetHeight < Rdiv.offsetHeight) {
+                Cdiv.style.height = Rdiv.offsetHeight + "px";
+                Adiv.style.height = Rdiv.offsetHeight + "px";
+            } else {
+                Rdiv.style.height = Cdiv.offsetHeight + "px";
+                Adiv.style.height = Cdiv.offsetHeight + "px";
+            }
+
+            timedCount();
+        }
+    </script>
+    <script>
+        function add(index) {
+            var a = document.getElementsByClassName("count");
+            document.getElementsByClassName("sub")[index].disabled = false;
+            var username = $(".name").html();
+            var number = $(".itemNumber")[index].innerHTML;
+            var flag = 1;
+            var data = {
+                username: username,
+                itemNumber: number,
+                count: flag
+            };
+            $.ajax({
+                type: "post",
+                url: "/cart/addorsub",
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        a[index].innerHTML = data.count;
+                    }
+                },
+                error: function () {
+                    alert("服务器异常");
+                }
+            });
+        }
+
+        function sub(index) {
+            var a = document.getElementsByClassName("count");
+            if (a[index].innerHTML == 1) {
+                document.getElementsByClassName("sub")[index].disabled = true;
+                return;
+            } else {
+                document.getElementsByClassName("sub")[index].disabled = false;
+            }
+            var username = $(".name").html();
+            var number = $(".itemNumber")[index].innerHTML;
+            var flag = 0;
+            var data = {
+                username: username,
+                itemNumber: number,
+                count: flag
+            };
+            $.ajax({
+                type: "post",
+                url: "/cart/addorsub",
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        a[index].innerHTML = data.count;
+                    }
+                },
+                error: function () {
+                    alert("服务器异常");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#btn3").click(function () {
+                $("#left").css("display", "none");
+                $("#address").css("display", "block");
+            });
+
+            $("#btn2").click(function () {
+                window.location.href = "/index";
+            })
+
+            $("#btn4").click(function () {
+                var name = $("#n").val();
+                var telphone = $("#t").val();
+                var address = $("#a").val();
+                var username = $(".name").html();
+                if (name == "" || telphone == "" || address == "") {
+                    alert("输入信息不能为空");
+                } else {
+                    window.location.href = "/address/insert?username=" + username + "&name=" + name + "&telphone=" + telphone + "&address=" + address;
+                }
+            });
+
+            $("#btn1").click(function () {
+                //字符串形式获取复选框的值
+                // var packageCodeList = $("input:checkbox[name='select']:checked").map(function(index,elem) {
+                //    return $(elem).val();
+                // }).get().join(',');
+                //数组形式获取复选框的值
+                var arr = [];
+                var select1 = [];
+                $('input[name="select"]:checked').each(function () {
+                    arr.push($(this).val());//向数组中添加元素
+                    select1.push($(".itemNumber")[$(this).val()].innerHTML);
+                });
+                var username = $(".name").html();
+                var ad1 = $("input[type='radio']:checked").val();
+                if (select1 == "") {
+                    alert("请勾选商品");
+                    return;
+                }
+                if (ad1 == undefined) {
+                    alert("请选择地址");
+                    return;
+                }
+                var address = ad1.split(",");
+
+                var data = {
+                    username: username,
+                    select: select1,
+                    address: address
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/order/submit",
+                    // contentType:"application/json;charset=utf-8",
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == "1") {
+                            alert("订单提交成功");
+                            window.location.href = "/cart/mycart?username=" + username;
+                            //window.location.reload();
+                        } else {
+                            alert("系统有误");
+                        }
+                    },
+                    error: function () {
+                        alert("服务器异常");
+                    }
+                })
+
+
+            })
+        })
+
+    </script>
+</head>
+<body onload="start();">
+<div id="box">
+    <div id="top"></div>
+    <div id="nav">
+        <ul>
+            <li><a href="#">鲜花礼品</a></li>
+            <li><a href="#">自助订花</a></li>
+            <li><a href="#">绿色植物</a></li>
+            <li><a href="#">花之物语</a></li>
+            <li><a href="#">会员中心</a></li>
+            <li><a href="#">联系我们</a></li>
+            <li class="pay-type"><a href="#">支付方式</a></li>
+        </ul>
+    </div>
+    <div id="left">
+        <div th:if="${session.user!=null}">
+            <p class="name" th:text="${session.user.name}">姓名</p>
+        </div>
+        <p>宝贝入车 <span id="time">几</span>秒</p>
+        <input type="button" id="btn3" value="填写收货地址"/>
+        <p>地址管理</p>
+        <div id="addresslist" th:each="address,stat:${list}">
+            <span style="margin-right: 10px;"><input type="radio" name="radio"
+                                                     th:value="${address.name}+','+${address.telphone}+','+${address.address}"></span>
+            <span th:text="${stat.count}"></span>
+            <span style="text-align: left; margin: 0px;" id="nt"
+                  th:text="${address.name}+','+${address.telphone}+','+${address.address}"></span>
+        </div>
+    </div>
+    <div id="address" style="display: none; font-size: 12px;">
+        <p class="n">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:<input type="text" class="text" id="n"/></p>
+        <p>联系电话:<input type="text" class="text" id="t"/></p>
+        <p>收货地址:<input type="text" class="text" id="a"/></p>
+        <input type="button" value="完成" id="btn4"/>
+    </div>
+
+    <div id="right">
+        <p class="cart">购物车</p>
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>主题</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>勾选</th>
+            </tr>
+            <tr th:each="cart,iterStat:${carts}" id="info" class="info">
+                <td th:text="${iterStat.count}" class="aindex">1</td>
+                <td th:text="${cart.getItemName()}">幸福的味道</td>
+                <td th:text="${cart.getPrice()}+'元'">288</td>
+                <td>
+                    <div class="addorsubcount">
+                        <button id="sub" class="sub" th:onclick="'javascript:sub('+${iterStat.index}+')' ">-</button>
+                        <span class="count" th:text="${cart.getCount()}"></span>
+                        <button id="add" class="add" th:onclick="'javascript:add('+${iterStat.index}+')' ">+</button>
+                        <span th:text="${cart.getItemNumber()}" class="itemNumber" style="display: none;"></span>
+                    </div>
+                </td>
+                <td><input type="checkbox" name="select" th:value="${iterStat.index}"></td>
+            </tr>
+        </table>
+        <input type="button" id="btn1" value="提交订单"/><br/>
+        <input type="button" id="btn2" value="继续购物"/>
+    </div>
+</div>
+</body>
+</html>

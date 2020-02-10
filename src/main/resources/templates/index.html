@@ -1,0 +1,184 @@
+<!doctype html>
+<html class="login-alone" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>有间花苑</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <!--<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                var name = $("#username").val();
+                var pass = $("#pass").val();
+                if (name == "" || pass == "") {
+                    alert("账号和密码不能为空！");
+                    return false;
+                }
+
+                var data = {
+                    name: name,
+                    pass: pass
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/user/login",
+                    async: false,
+                    data: JSON.stringify(data),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (message) {
+                        if (message != null) {
+                            alert("登录成功！");
+                            // $(".login").css("display","none");
+                            // $(".userinfo").css("display","block");
+                            // $("#name").html(message.name);
+                            // $(".cart1").attr("href","/cart/mycart?username="+message.name);
+                            window.location.href = "/index";
+                        } else {
+                            alert("用户名或密码错误！");
+                        }
+                    },
+                    error: function () {
+                        alert("服务器异常！");
+                    }
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+<div id="box">
+    <div id="top"></div>
+    <div id="nav">
+        <ul>
+            <li><a href="#">鲜花礼品</a></li>
+            <li><a href="#">自助订花</a></li>
+            <li><a href="#">绿色植物</a></li>
+            <li><a href="#">花之物语</a></li>
+            <li><a href="#">会员中心</a></li>
+            <li><a href="#">联系我们</a></li>
+            <li class="pay-type"><a href="#">支付方式</a></li>
+        </ul>
+    </div>
+    <div id="left">
+        <div class="login">
+            <img src="./images/login.jpg" alt="" width="100%">
+            <p>账&nbsp;号：<input type="text" name="username" id="username"
+                               th:value="${#request.getParameter('name')==null?'':#request.getParameter('name')}"></p>
+            <p>密&nbsp;码：<input type="password" name="pass" id="pass"></p>
+            <button id="btn1">登录</button>
+            <a href="/register">
+                <button id="btn2">注册</button>
+            </a>
+            <a href="">忘记密码</a>
+        </div>
+        <!--<div class="userinfo">-->
+        <!--<p>欢迎光临</p>-->
+        <!--<p id="name" style="font-size: 24px;">刘潇</p>-->
+        <!--<a href="" class="cart1"><img src="./images/lcart_cn.gif" alt=""></a>-->
+        <!--</div>-->
+        <div class="classify">
+            <div class="theme">
+                <img src="./images/category.jpg" alt="" width="100%">
+                <p>用途</p>
+                <ul>
+                    <li><a href="#">爱情鲜花</a></li>
+                    <li><a href="#">生日鲜花</a></li>
+                    <li><a href="#">新年鲜花</a></li>
+                    <li><a href="#">家庭用花</a></li>
+                    <li><a href="#">亲情用花</a></li>
+                    <li><a href="#">道歉鲜花</a></li>
+                    <li><a href="#">开业花篮</a></li>
+                    <li><a href="#">会议用花</a></li>
+                </ul>
+            </div>
+            <div class="material">
+                <p>材质</p>
+                <ul>
+                    <li><a href="#">玫瑰花</a></li>
+                    <li><a href="#">百合花</a></li>
+                    <li><a href="#">郁金香</a></li>
+                    <li><a href="#">太阳花</a></li>
+                    <li><a href="#">康乃馨</a></li>
+                    <li><a href="#">马蹄莲</a></li>
+                    <li><a href="#">扶朗</a></li>
+                    <li><a href="#">剑兰</a></li>
+                </ul>
+            </div>
+            <div class="price">
+                <p>价格</p>
+                <ul>
+                    <li><a href="#">100~200</a></li>
+                    <li><a href="#">200~300</a></li>
+                    <li><a href="#">300~400</a></li>
+                    <li><a href="#">400~500</a></li>
+                    <li><a href="#">500~600</a></li>
+                    <li><a href="#">600~700</a></li>
+                    <li><a href="#">700~800</a></li>
+                    <li><a href="#">800以上</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div id="right">
+        <div class="information">
+            <img src="./images/latest.jpg" alt="" width="100%">
+            <ul>
+                <li><a href="#"><img src="./images/new1.jpg" alt="" width="100%"></a></li>
+                <li><a href="#"><img src="./images/new2.jpg" alt="" width="100%"></a></li>
+                <li><a href="#"><img src="./images/new3.jpg" alt="" width="100%"></a></li>
+            </ul>
+        </div>
+        <div class="recommend">
+            <img src="./images/recommend.jpg" alt="" width="100%">
+            <ul th:each="item:${items}">
+                <li>
+                    <a th:href="@{'/item/detail?number='+${item.getItemNumber()}}"><img
+                            th:src="@{/images/{imagename}(imagename=${item.getImageName()})}" alt=""></a>
+                    <p th:text="${item.getItemName()}"></p>
+                    <p>￥<span th:text="${item.getPrice()}"></span></p>
+                </li>
+            </ul>
+        </div>
+        <div class="new-product">
+            <img src="./images/new.jpg" alt="" width="100%">
+            <ul>
+                <li>
+                    <a href="#"><img src="./images/flower9.jpg" alt="" width="100%"></a>
+                    <p>粉色迷情</p>
+                </li>
+                <li>
+                    <a href="#"><img src="./images/flower10.jpg" alt="" width="100%"></a>
+                    <p>海岸的优雅</p>
+                </li>
+                <li>
+                    <a href="#"><img src="./images/flower11.jpg" alt="" width="100%"></a>
+                    <p>百年地中海</p>
+                </li>
+                <li>
+                    <a href="#"><img src="./images/flower12.jpg" alt="" width="100%"></a>
+                    <p>爱要说出口</p>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul>
+                <li><a href="#">各种鲜花代表的含义</a></li>
+                <li><a href="#">花的喜怒哀乐与人的各种感觉</a></li>
+                <li><a href="#">养花与养生之道</a></li>
+                <li><a href="#">每天清晨的第一缕阳光</a></li>
+                <li><a href="#">花香的味道</a></li>
+                <li><a href="#">世界各地关于送花的习俗</a></li>
+                <li><a href="#">种花与送花</a></li>
+                <li><a href="#">手捧一束鲜花的等待</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="bottom">
+
+    </div>
+</div>
+</body>
+</html>

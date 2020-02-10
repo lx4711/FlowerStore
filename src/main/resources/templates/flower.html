@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>有间花苑</title>
+    <link rel="stylesheet" th:href="@{~/css/flower.css}">
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var date = new Date();
+            var days = date.getDay();
+            var weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            $("#week").html(weekday[days]);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var date = date.getDate();
+            $("#date").html(year + "年" + month + "月" + date + "日");
+
+            $("#addcart").click(function () {
+                var number = $("#number").val();
+                var username = $("#username").html();
+                var itemName = $("#name").html();
+                var data = {
+                    itemNumber: number,
+                    username: username,
+                    itemName: itemName
+                };
+                $.ajax({
+                    type: "post",
+                    data: JSON.stringify(data),
+                    url: "/cart/addtocart",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == "1" || data == "2") {
+                            alert("已添加购物车");
+                        } else if (data == "3") {
+                            alert("请先登录");
+                            window.location.href = "/";
+                        } else {
+                            alert("添加失败");
+                        }
+                    },
+                    error: function () {
+                        alert("服务器异常");
+                    }
+                });
+            });
+            $("#browse").click(function () {
+                var username = $("#username").html();
+                if (username == null || username == "") {
+                    alert("请先登录");
+                    window.location.href = "/";
+                } else {
+                    window.location.href = "/cart/mycart?username=" + username;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="box">
+    <div id="top"></div>
+    <div id="nav">
+        <ul>
+            <li><a href="">鲜花礼品</a></li>
+            <li><a href="">自助订花</a></li>
+            <li><a href="">绿色植物</a></li>
+            <li><a href="">花之物语</a></li>
+            <li><a href="">会员中心</a></li>
+            <li><a href="">联系我们</a></li>
+            <li class="pay-type"><a href="">支付方式</a></li>
+        </ul>
+    </div>
+    <div id="left">
+        <p id="theme">欢迎光临</p>
+        <div th:if="${session.user!=null}">
+            <p th:text="${session.user.name}" id="username" style="color: red;">姓名</p>
+        </div>
+        <p>今天&nbsp;<span id="week">星期二</span></p>
+        <p id="date">日期</p>
+    </div>
+    <div id="right">
+        <input type="hidden" id="number" th:value="${item1.getItemNumber()}">
+        <img th:src="@{/images/{imagename}(imagename=${item1.getImageName()})}"/>
+        <p id="name" th:text="${item1.getItemName()}">幸福的味道</p>
+        <p id="introduce" style="height: 150px;" th:text="${item1.getInfo()}">红色郁金香的花语是爱的告白。红色郁金香除了表达对爱人、恋人的爱以外，
+            红色的郁金香还有一点高贵之意。一说到郁金香，第一时间想到的就是荷兰，
+            那一个让好多女生都无限向往着的郁金香王国。郁金香的花束就像是一位亭亭玉立的美人，
+            安静而又迷人的矗立在花海中，让人渴望簇拥，也渴望轻嗅。</p>
+        <p id="price">售价:<span th:text="${item1.getPrice()}" id="money">288</span>元</p>
+        <input type="button" class="btn" id="addcart" value="加入购物车"/><br/>
+        <input type="button" class="btn" id="browse" value="查看购物车"/>
+    </div>
+</div>
+</body>
+</html>

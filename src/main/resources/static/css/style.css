@@ -1,0 +1,294 @@
+/* CSS Document */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    /*	background:#F3BDBE;*/
+    background: #E9E9E9;
+}
+
+ul li {
+    list-style: none;
+}
+
+#box {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#top {
+    width: 1000px;
+    height: 200px;
+    background: url(../images/2.jpg) no-repeat;
+    background-size: cover;
+}
+
+#nav {
+    width: 1000px;
+    height: 50px;
+}
+
+#nav li {
+    float: left;
+    width: 140px;
+    border-right: 3px solid #DBCFCF;
+    text-align: center;
+    line-height: 50px;
+    background: #F3BDBE;
+}
+
+#nav .pay-type {
+    width: 142px;
+    border-right: none;
+}
+
+#nav li a {
+    text-decoration: none;
+}
+
+#nav li a:hover {
+    color: #C63B3D;
+}
+
+#left {
+    width: 250px;
+    height: 980px;
+    border: 1px solid;
+    float: left;
+    background: #FBDADC;
+    border-right: none;
+}
+
+.login, .userinfo {
+    width: 230px;
+    height: 200px;
+    border: 1px solid;
+    margin: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.userinfo {
+    width: 230px;
+    height: 200px;
+    border: 1px solid;
+    margin: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+button {
+    cursor: pointer;
+}
+
+.userinfo {
+    height: 160px;
+    padding-top: 40px;
+    text-align: center;
+}
+
+.userinfo p {
+    margin-bottom: 16px;
+}
+
+.login img {
+    margin-bottom: 10px;
+}
+
+.login #btn1 {
+    width: 50px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.login #btn2 {
+    width: 50px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.login p {
+    text-align: right;
+    margin-right: 26px;
+    margin-bottom: 4px;
+}
+
+.login p input {
+    width: 120px;
+}
+
+.classify {
+    width: 230px;
+    height: 770px;
+    border: 1px solid;
+    margin: auto;
+    background: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.theme p {
+    background: #F46264;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+}
+
+.theme ul li {
+    margin-left: 10px;
+    list-style: none;
+    width: 200px;
+    background: url(./../images/icon1.gif) no-repeat left;
+    border-bottom: 1px dashed;
+    padding-left: 10px;
+}
+
+.material p {
+    margin-top: 10px;
+    background: #FBDADC;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+}
+
+.material ul li {
+    margin-left: 10px;
+    list-style: none;
+    width: 200px;
+    background: url(./../images/icon1.gif) no-repeat left;
+    border-bottom: 1px dashed;
+    padding-left: 10px;
+}
+
+.price p {
+    margin-top: 10px;
+    background: #FBEEEA;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+}
+
+.price ul li {
+    margin-left: 10px;
+    list-style: none;
+    width: 200px;
+    background: url(./../images/icon1.gif) no-repeat left;
+    border-bottom: 1px dashed;
+    padding-left: 10px;
+}
+
+#right {
+    width: 748px;
+    height: 980px;
+    border: 1px solid;
+    float: left;
+    background: #FBDADC;
+    border-left: none;
+}
+
+#right .information {
+    width: 730px;
+    height: 200px;
+    border: 1px solid;
+    margin: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    background-size: 100%;
+    background: #fff;
+}
+
+.information li {
+    margin-left: 10px;
+    width: 230px;
+    float: left;
+    list-style: none;
+}
+
+#right .recommend {
+    width: 730px;
+    height: 400px;
+    border: 1px solid;
+    margin: auto;
+    background: #fff;
+}
+
+.recommend li {
+    width: 170px;
+    float: left;
+    margin-left: 10px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.recommend li a img {
+    width: 70%;
+}
+
+#right .new-product {
+    width: 730px;
+    height: 220px;
+    border: 1px solid;
+    margin: auto;
+    background: #fff;
+}
+
+.new-product ul li {
+    text-align: center;
+    margin-left: 10px;
+    float: left;
+    width: 170px;
+}
+
+.new-product li a img {
+    width: 70%;
+}
+
+#right .news {
+    width: 730px;
+    height: 116px;
+    border: 1px solid;
+    margin: auto;
+    padding-top: 30px;
+    background: #fff;
+}
+
+.news ul li {
+    float: left;
+    width: 250px;
+    background: url(../images/icon2.gif) no-repeat left;
+    padding-left: 10px;
+    margin-left: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: #1E83C4;
+}
+
+.news ul li a:hover {
+    color: #DB494B;
+}
+
+.classify a:hover {
+    color: #DB494B;
+}
+
+#bottom {
+}
+
+
+
+
+
+
+
+

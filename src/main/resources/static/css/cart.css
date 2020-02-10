@@ -1,0 +1,243 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    /*	background:#F3BDBE;*/
+    background: #E9E9E9;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #1E83C4;
+}
+
+#box {
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 450px;
+}
+
+#top {
+    width: 1000px;
+    height: 200px;
+    background: url(../images/2.jpg) no-repeat;
+    background-size: cover;
+}
+
+#nav {
+    width: 1000px;
+    height: 50px;
+}
+
+#nav li {
+    float: left;
+    width: 140px;
+    border-right: 3px solid #DBCFCF;
+    text-align: center;
+    line-height: 50px;
+    background: #F3BDBE;
+}
+
+#nav .pay-type {
+    width: 142px;
+    border-right: none;
+}
+
+#nav li a {
+    text-decoration: none;
+}
+
+#nav li a:hover {
+    color: #C63B3D;
+}
+
+#left {
+    width: 250px;
+    height: 450px;
+    float: left;
+    background: #FBDADC;
+    border-right: 1px solid #FFF;
+}
+
+#left .name {
+    margin-top: 50px;
+}
+
+#left p {
+    padding-top: 10px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#left input {
+    margin-top: 50px;
+    margin-left: 60px;
+    width: 120px;
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    background: #FCC;
+}
+
+#right {
+    width: 748px;
+    min-height: 450px;
+    border: 1px solid;
+    float: left;
+    background: #FBDADC;
+    border: none;
+    padding-bottom: 40px;
+}
+
+table {
+    width: 500px;
+    /*height:120px;*/
+    margin-top: 40px;
+    margin-left: 120px;
+    border-collapse: collapse;
+}
+
+tr {
+    text-align: center;
+    border: none;
+    height: 36px;
+}
+
+th {
+    border: 1px solid #F8B9BA;
+}
+
+td {
+    border: 1px solid #F8B9BA;
+}
+
+.select {
+    width: 16px;
+    height: 16px;
+}
+
+#right p {
+    margin-top: 30px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+#right .cart {
+    font-size: 24px;
+    font-weight: bold;
+    background: url(../images/cart1.jpg) no-repeat left;
+    padding-left: 65px;
+}
+
+#btn1, #btn2 {
+    width: 200px;
+    height: 25px;
+    margin-top: 30px;
+    margin-left: 250px;
+    line-height: 25px;
+    border: none;
+    border-radius: 7px;
+    background: #FCC;
+}
+
+#btn1, #btn2, #btn3 {
+    cursor: pointer;
+}
+
+.addorsubcount {
+    margin: auto;
+    width: 85px;
+    height: 20px;
+    border: 1px solid #BAB4B4;
+}
+
+.addorsubcount #sub {
+    float: left;
+    width: 25px;
+    height: 21px;
+    background: none;
+    border: none;
+    border-right: 1px solid #BAB4B4;
+    cursor: pointer;
+}
+
+.addorsubcount #sub:active {
+    background: #C9C0C0;
+}
+
+.addorsubcount #add {
+    float: right;
+    width: 25px;
+    height: 21px;
+    background: none;
+    border: none;
+    border-left: 1px solid #BAB4B4;
+    cursor: pointer;
+    line-height: 21px;
+}
+
+.addorsubcount #add:active {
+    background: #C9C0C0;
+}
+
+#address {
+    width: 250px;
+    height: 450px;
+    float: left;
+    background: #FBDADC;
+    border-right: 1px solid #FFF;
+}
+
+#address .n {
+    margin-top: 90px;
+}
+
+#address p {
+    padding-top: 5px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#address .text {
+    margin-top: 10px;
+    width: 120px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background: #FCC;
+    margin-left: 5px;
+}
+
+#address #btn4 {
+    margin-top: 50px;
+    margin-left: 85px;
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background: #FCC;
+    cursor: pointer;
+}
+
+#addresslist input {
+    width: 14px;
+    height: 14px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+

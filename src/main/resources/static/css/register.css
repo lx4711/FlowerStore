@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    width: 100%;
+    font-size: 16px;
+    font-family: 微软雅黑;
+    background: url(../images/register1.JPG) no-repeat;
+    background-size: 100%;
+}
+
+.box {
+    width: 400px;
+    height: 380px;
+    background: url(../images/Re.jpg) no-repeat;
+    background-size: cover;
+    margin: 100px auto;
+}
+
+#tab {
+    padding-top: 50px;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 40px;
+}
+
+.left {
+    width: 80px;
+    text-align: right;
+}
+
+.right {
+    width: 250px;
+    text-align: left;
+}
+
+.text {
+    margin-left: 10px;
+    width: 230px;
+    height: 30px;
+    border: none;
+    background: #D2D2D2;
+    border-radius: 4px;
+}
+
+#identify {
+    width: 90px;
+    margin-right: 10px;
+}
+
+.right span {
+    font-size: 18px;
+    text-align: center;
+}
+
+.right #another {
+    float: right;
+    margin-top: 8px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+#a {
+    margin-left: 15px;
+}
+
+#b {
+    margin-left: 80px;
+}
+
+#btn {
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
