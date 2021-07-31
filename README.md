@@ -11,7 +11,5 @@ maven 3.6以上
 2.配置好jdk和maven;
 3.修改application.yml中端口、数据库名称、用户名及密码等;
 4.再启动FlowerApplication类，项目成功启动。
-hello
-hello world
-这是dev分支，做了修改打算先合并到master分支上。
-
+这是master分支，目前什么都没有合并。
+if ture 我认为现在可以合并了。
